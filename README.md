@@ -17,12 +17,12 @@ These stored images (1. Step) from the directory 'Without Mask/' are now compare
 To challenge the system I gave the monitoring-system a video form the German news TV as input and also added a few pictures from Dwayne Johnson and Leonardo DiCaprio to the detected faces from the video (I also added them to the database before the verification step starts). The face detection and verification works extremely well. All detected facial images can be assigned to the persons in the database without any problems. New persons are detected without any troubles and also the faces of Dwayne and Leonardo are recognized as already existent in the database and mapped in the folders from 'Face Verification/' accordingly. I tried the system with many different videos, persons and database initializations. It always worked reliably.
 
 
-## 3Instructions for local deployment:
+## Instructions for local deployment:
 * Other version combinations may also work but its complicated, so thats the constalation I used...
 * install python version 3.6 (Don't forget to add Python to PATH Variables during the installation instructions, otherwise it will be hard to access pip)
 * pip install tensorflow==2.4.1
 * pip install keras==2.4.1
-* pip install git+https://github.com/rcmalli/keras-vggface.git
+* pip install keras_vggface
 * pip install keras_applications
 * pip install mtcnn
 * pip uninstall pyparsing
