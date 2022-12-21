@@ -6,14 +6,14 @@ Development of a CNN deep learning monitoring system for automatic face detectio
 ### 1. Pre Setup: 
 You can create a new database with the file 'Create and Visualize database.py' based on the profile pictures (ID-photos) in the folder 'profile_pictures/'.
 
-### Face Detection and Classification: 
+### 2. Face Detection and Classification: 
 The file 'Face_Detection and Classification' loads the video from 'Input Video/' and detects in constant intervals all faces from the persons in the video. This detection is based on a MTCNN neuronal network which returns the coordinates of the 'inner' face. For visual purposes we are transforming those coordinates in a way so that we can see and store the entire head. After that we classify all the detected faces in two groups 'mask wearers' and 'non-mask wearers'. This classification is based on a self trained convolutional neuronal network. The development and training of the network can be found in the folder 'Training of Classification CNN/'. The training utilizes a for our purposes modified Kaggle dataset of several thousand face images (see implementation) and achieves a final validation accuracy of 99.6%.
 
-### 2. Face Verificaiton: 
+### 3. Face Verificaiton: 
 These stored images (1. Step) from the directory 'Without Mask/' are now compared with the ID-photos from the SQLite3 database 'Compare_detected_faces_with_database/Database/Profil_Database.db' by the program 'Face_Verification.py'. This database contains the previously defined people with the values (ID, first name, last name, profile picture (ID-photo), number of mask violations). The comparison is carried out by embedding the detected faces which is a representation at the end of the CNN layers before the cnn classifier starts. It is generated using an imported Resnet50 based on the VGGFace2 data sets. Based on the high-dimensional embeddings of the two images, the cosine distance is calculated (value between 0 and 1). If the value is below 0.45 (threshold, self-optimized), the two images belong to the same person. Depending on the verification results, a folder  for each person is created in the directory “Compare_detected_faces_with_database/Face Verification/”. Each person's folder contains all of the detected facial non-mask wearing images of this specific person. Unknown 'NEW' people are automatically added to the database as strangers (folder name: 'ID_Fremd_NEU/') and will therefore be recognized in the future. Depending on the number of occurrences of mask violations, a counter for each person is calculated. In the end, with the script 'Create and Visualize database.py' you can also plot see the final state of the database after the above steps were completed.
 
 
-### 3. Conclusion
+### 3. Conclusion:
 To challenge the system I gave the monitoring-system a video form the German news TV as input and also added a few pictures from Dwayne Johnson and Leonardo DiCaprio to the detected faces from the video (I also added them to the database before the verification step starts). The face detection and verification works extremely well. All detected facial images can be assigned to the persons in the database without any problems. New persons are detected without any troubles and also the faces of Dwayne and Leonardo are recognized as already existent in the database and mapped in the folders from 'Face Verification/' accordingly. I tried the system with many different videos, persons and database initializations. It always worked reliably.
 
 
